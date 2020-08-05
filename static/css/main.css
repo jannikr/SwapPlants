@@ -8,12 +8,25 @@
   font-size: 2.25rem;
 }
 
-.blog-header-logo:hover {
+.blog-header-logo-small {
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  font-size: 1.25rem;
+}
+
+.blog-header-logo:hover, .blog-header-logo-small:hover{
   text-decoration: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+}
+
+.h2-smaller {
+  font-size: 1.25rem;
+}
+
+h3 {
+  font-size: 1.5rem;
 }
 
 .display-4 {
@@ -23,4 +36,30 @@ h1, h2, h3, h4, h5, h6 {
   .display-4 {
     font-size: 3rem;
   }
+}
+
+/* Login & Sign Up Form */
+
+.wrapper {
+    margin: 10%;
+}
+
+.form-signin {
+    max-width: 380px;
+    background-color: #fff;
+    padding: 15px 40px 50px;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+}
+
+.form-signin .form-signin-heading, .form-signin .checkbox {
+    margin-bottom: 30px;
+}
+
+.form-signin input[type="text"], .form-signin input[type="password"] {
+    margin-bottom: 20px;
+}
+
+.form-signin .form-control {
+    padding: 10px;
 }

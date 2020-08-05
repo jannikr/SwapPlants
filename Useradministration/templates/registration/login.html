@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Buddy Farm - Anmelden{% endblock %}
+
+{% block description %}Melde dich bei Buddy Farm an um Nachrichten zu senden und eigene Pflanzen auf Buddy Farm hochzuladen.{% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+    <div class="container">
+<div class="d-flex justify-content-center">
+
+    <div class="wrapper">
+
+        <form method="post" class="form-signin">
+            {% csrf_token %}
+            <h2 class="form-signin-heading text-center">Anmelden</h2>
+            <input type="text" class="form-control" name="username" placeholder="Nutzername" required="" autofocus=""/>
+            <input type="password" class="form-control" name="password" placeholder="Passwort" required=""/>
+            <button class="btn btn-lg btn-secondary btn-block" id="textCheckbox" type="submit">Anmelden</button>
+            <hr>
+            <label>
+                Noch kein Konto? <a href="#">Hier registrieren.</a>
+            </label>
+
+        </form>
+
+    </div>
+
+
+
+
+        <img class="card-img-right flex-auto d-none d-md-block" style="width: auto; margin-top: 10%; margin-right: 10%; height: 364px; object-fit: fill; object-position: right" src="{% static '/images/login-illustration.jpg' %}"
+                         alt="Card image cap">
+    </div>
+
+    </div>
+
+{% endblock content %}
