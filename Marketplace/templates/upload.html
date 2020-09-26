@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block title %}Buddy Farm - Inserat erstellen{% endblock %}
+
+{% block description %}Erstelle ein Inserat um deine Pflanzen zu tauschen oder zu verschenken.{% endblock %}
+
+
+{% load static %}
+
+{% block content %}
+        <div class="container">
+
+        <section class="jumbotron text-center mt-4"
+                 style="background: url({% static '/images/header-plant-2.jpg' %})no-repeat center; background-size: cover;">
+            <div class="container">
+                <h1 class="jumbotron-heading">Inserat erstellen</h1>
+                <p class="lead text-muted">Teile deine Pflanzen mit anderen Hobbygärtnern</p>
+
+            </div>
+        </section>
+
+
+        <div method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_title">Name deines Angebots*</label>
+                <input type="text" name="title" maxlength="100" required class="form-control" id="id_title" placeholder="">
+                                <small class="form-text text-muted">
+  Was für eine Pflanze möchtest du auf Buddy Farm anbieten?
+</small>
+            </div>
+            <div class="form-group">
+                <label for="id_description">Beschreibung*</label>
+                <textarea name="description" class="form-control" id="id_description" rows="3"></textarea>
+                <small class="form-text text-muted">
+  Beschreibe die Pflanze um andere Nutzer bei der Auswahl zu unterstützen.
+</small>
+            </div>
+            <div class="form-group">
+                <label for="id_plant_type">Kategorie*</label>
+                <select name="plant_type" class="form-control" required id="id_plant_type">
+                    <option value="O">Obst</option>
+                    <option value="G">Gemüse</option>
+                    <option value="Z">Zierpflanze</option>
+                    <option value="K">Kraut</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="id_market_type">Angebotstyp*</label>
+                <select name="market_type" class="form-control" required id="id_market_type">
+                    <option value="V">Verschenken</option>
+                    <option value="T">Tauschen</option>
+                </select>
+            </div>
+                        <div class="form-group">
+                <label for="id_market_type">Standortempfehlung</label>
+                <select name="market_type" class="form-control" required id="id_market_type">
+                    <option value="Sc">Schatten</option>
+                    <option value="H">Halbschatten</option>
+                    <option value="So">Sonne</option>
+                </select>
+            </div>
+                        <div class="form-row">
+    <div class="col">
+         <label for="id_market_type">Blütezeit</label>
+      <input id="" type="date" class="form-control" placeholder="">
+    </div>
+    <div class="col">
+         <label for="id_market_type">Erntezeit</label>
+      <input disabled type="date" class="form-control" placeholder="">
+    </div>
+  </div>
+<br>
+            <div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+  <label class="form-check-label" for="inlineCheckbox1">Mehrjährig</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+  <label class="form-check-label" for="inlineCheckbox2">Winterfest</label>
+</div>
+            <div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" disabled>
+  <label class="form-check-label" for="inlineCheckbox2">Reserviert</label>
+</div>
+<div class="input-group mt-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroupFileAddon01">Hochladen</span>
+  </div>
+  <div class="custom-file">
+    <input type="file" class="custom-file-input" id="inputGroupFile01"
+      aria-describedby="inputGroupFileAddon01">
+    <label class="custom-file-label" for="inputGroupFile01">Bild auswählen</label>
+  </div>
+</div>
+
+
+                        <hr class="separator">
+                        <div class="form-row">
+    <div class="col-7">
+         <label for="id_market_type">Stadt*</label>
+      <input id="" type="text" class="form-control" placeholder="">
+    </div>
+    <div class="col">
+         <label for="id_market_type">Postleitzahl</label>
+      <input type="text" class="form-control" placeholder="">
+    </div>
+  </div>
+                        <div class="form-check mt-3">
+                <input type="checkbox" required class="form-check-input" id="termsandconditions">
+                <label class="form-check-label" for="termsandconditions">Ich stimme den <a href="#">Nutzungsbedingungen</a> zu.*</label>
+            </div>
+
+
+            <button class="btn btn-secondary mt-4 mb-4" type="submit">Abschicken</button>
+
+        </form>
+
+    </div>
+         <p class="font-weight-light mt-3">Pflichtfelder sind mit einem Stern (*) markiert.</p>
+        </div>
+
+{% endblock content %}

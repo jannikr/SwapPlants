@@ -1,13 +1,20 @@
+from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
 
 
 # Create your models here.
+from django.db.models.signals import pre_save
+
+from SwapPlants.util import unique_slug_generator
+
 
 class Plant(models.Model):
     PLANT_CATEGORIES = [
         ('O', 'Obst'),
         ('G', 'Gemüse'),
         ('Z', 'Zierpflanze'),
+        ('K', 'Kraut'),
     ]
 
     MARKET_CATEGORIES = [
@@ -33,10 +40,10 @@ class Plant(models.Model):
     hardy = models.BooleanField(blank=True, null=True)
     location_type = models.CharField(max_length=2, choices=LOCATION_CATEGORIES, blank=True, null=True)
 
-    # user = models.ForeignKey(ShopUser,
-    #                             on_delete=models.CASCADE,
-    #                             related_name='user',
-    #                             related_query_name='users')
+    user = models.ForeignKey(User,
+                                on_delete=models.CASCADE,
+                                related_name='users',
+                                related_query_name='user')
 
     image = models.ImageField(null=True)
     plant_type = models.CharField(max_length=1, choices=PLANT_CATEGORIES)
@@ -46,7 +53,24 @@ class Plant(models.Model):
     city = models.CharField(max_length=30)
     zip_code = models.IntegerField(blank=True, null=True)
 
+    slug = models.SlugField(max_length=250, null=True, blank=True)
+
     class Meta:
         ordering = ['created_at', 'title']
+        index_together = ('title', 'slug')
         verbose_name = 'Plant'
         verbose_name_plural = 'Plants'
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'slug': self.slug})
+
+
+def pre_save_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = unique_slug_generator(instance)
+
+
+pre_save.connect(pre_save_receiver, sender=Plant)

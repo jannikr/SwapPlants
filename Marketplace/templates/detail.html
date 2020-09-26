@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block title %}Buddy Farm - {{ that_one_product.title }} Inserat aus {{ that_one_product.city }}{% endblock %}
+
+{% block description %}Auf Buddy Farm können Sie mit Hobbygärtnern aus Ihrer Umgebung Pflanzen tauschen oder
+    verschenken.
+    Hier finden Sie Obst, Gemüse und Zierpflanzen in Ihrer Umgebung. {% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="wrapper-detail">
+
+            <div class="row mt-4 mb-4 justify-content-between">
+                <div class="col-md-5 ">
+                    <img style="width: 445px; height: auto; margin-left: auto; margin-right: auto"
+                         alt="{{ that_one_product.title }}" class="product-image img-show"
+                         src="{{ that_one_product.image.url }}">
+                </div>
+                <div style="margin-top: auto; margin-bottom: auto" class="col-md-6">
+
+                    <small class="text-muted mt-">{{ that_one_product.created_at | date:'d.m.Y H:i' }} UHR •
+                        {{ that_one_product.city | upper }}</small>
+                    <h1>{{ that_one_product.title }}</h1>
+
+                <div class="row justify-content-between mb-2">
+                                                <div class="col">
+                            <small title="Inserattyp" class="text-muted"><i class="fa fa-shopping-cart"
+                                                                            aria-hidden="true"></i> Zu(m) {{ that_one_product.get_market_type_display }}
+                            </small>
+                        </div>
+                    </div>
+
+                    <div id="summary">
+                        <p class="text-muted">{{ that_one_product.description }}</p>
+                    </div>
+
+                    <hr style="border-top: 1px solid lightgray;">
+
+                    <div class="row justify-content-between">
+                        <div class="col">
+                            <small title="Lageempfehlung" class="text-muted"><i
+                                    class="fa fa-sun-o text-muted"></i> {{ that_one_product.get_location_type_display }}
+                            </small>
+                        </div>
+                        <div class="col">
+                            <small title="Winterfest" class="text-muted"><i class="fa fa-snowflake-o"
+                                                                            aria-hidden="true"></i>
+                                {% if that_one_product.hardy %}
+                                    winterfest
+                                {% else %}
+                                    nicht winterfest
+                                {% endif %}
+                            </small>
+                        </div>
+                                                <div class="col">
+                            <small title="Mehrjährig" class="text-muted"><i class="fa fa-calendar-o"
+                                                                            aria-hidden="true"></i>
+                                {% if that_one_product.perennial %}
+                                    mehrjährig
+                                {% else %}
+                                    einjährig
+                                {% endif %}
+                            </small>
+                        </div>
+                                                <div class="col">
+                            <small title="Pflanzenart" class="text-muted"><i class="fa fa-lemon-o" aria-hidden="true"></i> {{ that_one_product.get_plant_type_display }}
+                            </small>
+                    </div>
+                    </div>
+                                    <hr style="border-top: 1px solid lightgray;">
+
+                <div class="align-items-center">
+                {% if not that_one_product.user == user %}
+                    <button type="button" class="btn btn-outline-secondary btn-sm"><i class="fa fa-paper-plane"
+                                                                                      aria-hidden="true"></i> Nachricht
+                        schreiben
+                    </button>
+                {% endif %}
+                    {% if that_one_product.reserved %}
+                        <button disabled type="button" class="btn btn-outline-danger btn-sm">Reserviert</button> -
+                    {% endif %}
+                        {% if not that_one_product.user == user %}
+                        <a href="{% url 'edit' that_one_product.slug %}" class="btn btn-outline-secondary btn-sm" role="button"><i class="fa fa-bookmark" aria-hidden="true"></i> Merken</a>
+
+                    {% endif %}
+                {% if that_one_product.user == user %}
+                        <a href="{% url 'edit' that_one_product.slug %}" class="btn btn-outline-secondary btn-sm" role="button"><i class="fa fa-pencil" aria-hidden="true"></i> Bearbeiten</a>
+
+                    {% endif %}
+                                {% if that_one_product.user == user %}
+                        <a href="{% url 'edit' that_one_product.slug %}" class="btn btn-outline-secondary btn-sm" role="button"><i class="fa fa-flag" aria-hidden="true"></i> Als reserviert markieren</a>
+
+                    {% endif %}
+                {% if that_one_product.user == user %}
+                        <a href="{% url 'edit' that_one_product.slug %}" class="btn btn-outline-danger btn-sm" role="button"><i class="fa fa-trash" aria-hidden="true"></i> Inserat löschen</a>
+
+                    {% endif %}
+
+
+
+                </div>
+            </div>
+
+        </div>
+        </div>
+    </div>
+
+{% endblock content %}

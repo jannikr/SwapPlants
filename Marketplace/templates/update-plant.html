@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Buddy Farm - Inserat bearbeiten{% endblock %}
+
+{% block description %}Bearbeite ein Inserat um deine Pflanzen zu tauschen oder zu verschenken.{% endblock %}
+
+
+{% load static %}
+
+{% block content %}
+
+    <div class="container">
+
+        <section class="jumbotron text-center mt-4"
+                 style="background: url({% static '/images/header-plant-2.jpg' %})no-repeat center; background-size: cover;">
+            <div class="container">
+                <h1 class="jumbotron-heading">Inserat bearbeiten</h1>
+                <p class="lead text-muted">Teile deine Pflanzen mit anderen Hobbygärtnern</p>
+
+            </div>
+        </section>
+
+
+            <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for hidden_field in form.hidden_fields %}
+    {{ hidden_field }}
+  {% endfor %}
+
+  {% for field in form.visible_fields %}
+    <div class="form-group">
+      {{ field.label_tag }}
+      {% render_field field class="form-control" %}
+    </div>
+  {% endfor %}
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+    </div>
+
+{% endblock content %}

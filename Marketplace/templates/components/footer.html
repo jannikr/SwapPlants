@@ -1,11 +1,8 @@
 <footer class="pt-4 my-md-5 pt-md-5 border-top">
     <div class="row">
       <div class="col-12 col-md">
-        <a class="blog-header-logo-small text-dark" href="#">Buddy Farm</a>
-        <small class="d-block text-muted">Made with <svg width="13px" height="13px" class="heart" viewBox="0 0 32 29.6">
-  <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
-	c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z" />
-</svg> in Berlin</small>
+        <a class="blog-header-logo-small text-dark" href="{% url 'home' %}">Buddy Farm</a>
+        <small class="d-block text-muted">Made with <i class="fa fa-heart" aria-hidden="true"></i> in Berlin, Germany</small>
         <small class="d-block mb-3 text-muted">&copy; 2020</small>
       </div>
       <div class="col-6 col-md">
@@ -13,7 +10,7 @@
         <ul class="list-unstyled text-small">
           <li><a class="text-muted" href="#">Beliebte Artikel</a></li>
           <li><a class="text-muted" href="#">Ökologisch gärtnern</a></li>
-          <li><a class="text-muted" href="#">DIY Anleitungen</a></li>
+          <li><a class="text-muted" href="{% url 'faq' %}">FAQ</a></li>
         </ul>
       </div>
       <div class="col-6 col-md">
@@ -28,7 +25,7 @@
         <h2 class="h2-smaller">Über uns</h2>
         <ul class="list-unstyled text-small">
           <li><a class="text-muted" href="#">Team</a></li>
-          <li><a class="text-muted" href="#">Impressum</a></li>
+          <li><a class="text-muted" href="{% url 'impressum' %}">Impressum</a></li>
           <li><a class="text-muted" href="#">Datenschutzerklärung</a></li>
         </ul>
       </div>

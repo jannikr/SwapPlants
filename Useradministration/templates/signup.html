@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Buddy Farm - Registrieren{% endblock %}
+
+{% block description %}Melde dich bei Buddy Farm an um Nachrichten zu senden und eigene Pflanzen auf Buddy Farm hochzuladen.{% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+    <div class="container">
+
+        <div class="wrapper">
+            <form method="post" enctype="multipart/form-data" class="form-signin form-signup">
+                {% csrf_token %}
+                <h1 class="form-signin-heading text-center">Registrieren</h1>
+                <input type="text" class="form-control" name="first_name" placeholder="Vorname" required="" autofocus=""/>
+                <input type="text" class="form-control" name="last_name" placeholder="Nachname" autofocus=""/>
+                <input type="text" class="form-control" name="username" placeholder="Nutzername" required="" autofocus=""/>
+                <input type="text" class="form-control" name="email" placeholder="E-Mail" required="" autofocus=""/>
+                <hr>
+                <input type="password" class="form-control" name="password1" id="id_password1" placeholder="Passwort" autocomplete="new-password" required=""/>
+                <input type="password" class="form-control" name="password2" id="id_password2" placeholder="Passwort wiederholen" autocomplete="new-password" required=""/>
+                <label class="checkbox">
+                    <input type="checkbox" value="conditons" id="conditions" name="conditions" required="">
+                    Ich akzeptiere die <a href="#">Nutzungsbedingungen</a>.<br><br> Informationen zur Verarbeitung Deiner Daten findest Du in unserer <a href="#">Datenschutzerklärung</a>.
+                </label>
+                <button type="submit" class="btn btn-lg btn-secondary btn-block" id="textCheckbox">Registrieren</button>
+            </form>
+        </div>
+
+
+    </div>
+
+
+{% endblock content %}
