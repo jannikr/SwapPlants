@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container">
+
+        <h1 class="mt-4 mb-4">Nachrichten</h1>
+
+        <div class="container-fluid">
+            <div class="row justify-content-between" style="height: 500px">
+                <div class="col-lg-3 border rounded">
+                    {% for message in messages %}
+                    <div class="card {% if active_message == message.user.username %}bg-light{% endif %} mt-3" style="max-width: 18rem;">
+                        <div class="card-body">
+                            <a href="{% url 'directs' message.user.username%}"><h5 class="card-title">{{ message.user.username }}</h5></a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+
+                <div class="col-lg-8 col-md-offset-2 border rounded">
+                    {% for direct in directs %}
+                    <div class="card w-75 bg-light mt-3 {% if user.get_username == direct.user.username %}float-right{% else %}float-left{% endif %}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ direct.sender.username }}</h5>
+                            <p class="card-text">{{ direct.message_content }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                        <form role="form" method="POST" action="{% url 'send_direct' %}" class="form-inline" style="position: absolute; bottom: 0;">
+                            {% csrf_token %}
+                            <label class="sr-only" for="inlineFormInputName2">Name</label>
+                            <input type="hidden" name="to_user" value={{ active_message }}>
+                            <textarea name="body" placeholder="Nachrichten schreiben..."></textarea>
+                            <button type="submit" name="action" class="btn btn-primary mb-2"><i class="fa fa-paper-plane"
+                                                                                  aria-hidden="true"></i></button>
+                        </form>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock content %}

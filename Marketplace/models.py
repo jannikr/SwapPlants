@@ -5,7 +5,6 @@ from django.urls import reverse
 
 # Create your models here.
 from django.db.models.signals import pre_save
-
 from SwapPlants.util import unique_slug_generator
 
 
